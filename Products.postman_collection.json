@@ -1,0 +1,124 @@
+{
+  "info": {
+    "_postman_id": "f3e74dc1-d26e-47a3-805f-928e046000ea",
+    "name": "Products",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24341350"
+  },
+  "item": [
+    {
+      "name": "getAll",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"filter\": {},\n    \"sort\": {}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://express-api-gray.vercel.app/products",
+          "protocol": "https",
+          "host": ["express-api-gray", "vercel", "app"],
+          "path": ["products"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "generateRaport",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://express-api-gray.vercel.app/products/raport",
+          "protocol": "https",
+          "host": ["express-api-gray", "vercel", "app"],
+          "path": ["products", "raport"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addProduct",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Handcerchief\",\n    \"description\": \"Normal handcerchief\",\n    \"stock\": 1,\n    \"price\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://express-api-gray.vercel.app/products",
+          "protocol": "https",
+          "host": ["express-api-gray", "vercel", "app"],
+          "path": ["products"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Handcerchief\",\n    \"description\": \"Normal handcerchief\",\n    \"stock\": 1,\n    \"price\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://express-api-gray.vercel.app/products/:id",
+          "protocol": "https",
+          "host": ["express-api-gray", "vercel", "app"],
+          "path": ["products", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "63bff8b53df6d4491318cb32",
+              "description": "ObjectId of the document"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://express-api-gray.vercel.app/products/:id",
+          "protocol": "https",
+          "host": ["express-api-gray", "vercel", "app"],
+          "path": ["products", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "63bff8b53df6d4491318cb32",
+              "description": "ObjectId of the document"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
