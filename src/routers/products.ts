@@ -1,22 +1,13 @@
-import express from 'express';
-import cors from 'cors';
-import { model, connect, isValidObjectId } from 'mongoose';
-import dotenv from 'dotenv';
-import { productSchema, zodProductSchema } from './schemas/product.js';
-import { getAllInputSchema } from './validation/getAll.js';
-import { createOneInputSchema } from './validation/createOne.js';
-dotenv.config();
+import { Router } from 'express';
+import { model, isValidObjectId } from 'mongoose';
+import { getAllInputSchema } from '../validation/getAll';
+import { createOneInputSchema } from '../validation/createOne';
+import { productSchema, zodProductSchema } from '../schemas/product';
 
-connect(process.env.DB_ADDRESS ?? 'localhost:27017', {
-  dbName: process.env.DB_NAME ?? 'test',
-});
+const productsRouter = Router();
 const products = model('Products', productSchema);
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.get('/products', async (req, res) => {
+productsRouter.get('/', async (req, res) => {
   try {
     const { sort, filter } = getAllInputSchema.parse(req.body);
 
@@ -32,7 +23,7 @@ app.get('/products', async (req, res) => {
   }
 });
 
-app.post('/products', async (req, res) => {
+productsRouter.post('/', async (req, res) => {
   try {
     const input = createOneInputSchema.parse(req.body);
 
@@ -49,7 +40,7 @@ app.post('/products', async (req, res) => {
   }
 });
 
-app.put('/products/:id', async (req, res) => {
+productsRouter.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -75,7 +66,7 @@ app.put('/products/:id', async (req, res) => {
   }
 });
 
-app.delete('/products/:id', async (req, res) => {
+productsRouter.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -99,7 +90,7 @@ app.delete('/products/:id', async (req, res) => {
   }
 });
 
-app.get('/products/raport', async (req, res) => {
+productsRouter.get('/raport', async (req, res) => {
   try {
     const raport = await products.aggregate([
       {
@@ -118,6 +109,4 @@ app.get('/products/raport', async (req, res) => {
   }
 });
 
-app.listen('3000', () => {
-  console.log('Example app listening on port 3000');
-});
+export default productsRouter;
