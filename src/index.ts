@@ -6,7 +6,7 @@ import productsRouter from './routers/products';
 
 dotenv.config();
 
-connect(process.env.DB_ADDRESS ?? 'localhost:27017', {
+connect(process.env.DB_ADDRESS ?? 'mongodb://localhost:27017', {
   dbName: process.env.DB_NAME ?? 'test',
 });
 
@@ -16,6 +16,6 @@ app.use(express.json());
 
 app.use('/products', productsRouter);
 
-app.listen('3000', () => {
+app.listen(process.env.PORT ?? '3000', () => {
   console.log('Example app listening on port 3000');
 });
