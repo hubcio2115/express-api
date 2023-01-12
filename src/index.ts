@@ -16,6 +16,8 @@ app.use(express.json());
 
 app.use('/products', productsRouter);
 
+app.get('/', (_, res) => res.send('Hello on my api! :D'));
+
 app.listen(process.env.PORT ?? '3000', () => {
   console.log('Example app listening on port 3000');
 });
