@@ -16,10 +16,10 @@ productsRouter.get('/', async (req, res) => {
 
     const data = await products.find({}).sort({});
 
-    res.send(data);
+    return res.send(data);
   } catch (e) {
     console.error(e);
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -32,11 +32,12 @@ productsRouter.post('/', async (req, res) => {
     if (isUnique) {
       const newProduct = (await products.create(input)).toJSON();
 
-      res.send(newProduct);
-    } else throw new Error('Product with provided title already exists');
+      return res.send(newProduct);
+    } else
+      return res.status(400).send('Product with provided title already exists');
   } catch (e) {
     console.error(e);
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -56,13 +57,15 @@ productsRouter.put('/:id', async (req, res) => {
           })
         )?.toJSON();
 
-        res.send(updateResult);
+        return res.send(updateResult);
       } else
-        res.status(404).send('There is no document in the db with provided id');
-    } else res.status(400).send('Provided id is not a valid ObjectId');
+        return res
+          .status(404)
+          .send('There is no document in the db with provided id');
+    } else return res.status(400).send('Provided id is not a valid ObjectId');
   } catch (e) {
     console.error(e);
-    res.status(404).send(e);
+    return res.status(404).send(e);
   }
 });
 
@@ -80,13 +83,15 @@ productsRouter.delete('/:id', async (req, res) => {
           })
         )?.toJSON();
 
-        res.send(deletedData);
+        return res.send(deletedData);
       } else
-        res.status(404).send('There is no document in the db with provided id');
+        return res
+          .status(404)
+          .send('There is no document in the db with provided id');
     } else res.status(400).send('Provided id is not a valid ObjectId');
   } catch (e) {
     console.error(e);
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -102,10 +107,10 @@ productsRouter.get('/raport', async (req, res) => {
       },
     ]);
 
-    res.send(raport);
+    return res.send(raport);
   } catch (e) {
     console.error(e);
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
